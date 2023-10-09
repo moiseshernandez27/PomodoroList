@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temporizador Pomodoro</title>
+    <style>
+        #temporizador {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Temporizador Pomodoro</h2>
+    <div id="temporizador">25:00</div>
+    <button onclick="iniciarTemporizador()">Iniciar</button>
+    <button onclick="detenerTemporizador()">Detener</button>
+
+    <script>
+        var temporizador;
+        var tiempoRestante = 25 * 60; // 25 minutos en segundos
+
+        function iniciarTemporizador() {
+            temporizador = setInterval(actualizarTemporizador, 1000);
+            document.getElementById("temporizador").style.color = "black";
+        }
+
+        function detenerTemporizador() {
+            clearInterval(temporizador);
+            document.getElementById("temporizador").style.color = "red";
+        }
+
+        function actualizarTemporizador() {
+            var minutos = Math.floor(tiempoRestante / 60);
+            var segundos = tiempoRestante % 60;
+
+            if (segundos < 10) {
+                segundos = "0" + segundos;
+            }
+
+            document.getElementById("temporizador").innerHTML = minutos + ":" + segundos;
+
+            if (tiempoRestante <= 0) {
+                detenerTemporizador();
+                alert("¡Tiempo de Pomodoro terminado! Tómate un descanso.");
+                // Puedes agregar aquí código para iniciar un descanso automáticamente.
+            }
+
+            tiempoRestante--;
+        }
+    </script>
+</body>
+</html>
